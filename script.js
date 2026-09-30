@@ -253,18 +253,30 @@ const resultsCount = document.querySelector("#results-count");
 function renderVehicles(vehicleList) { vehiclesContainer.innerHTML = ""; 
 resultsCount.textContent =
     `Showing ${vehicleList.length} of ${vehicles.length} vehicles`;   
-vehicleList.forEach((vehicle) => {
+    vehicleList.forEach((vehicle) => {
     const card = document.createElement("div");
 
-    card.innerHTML = `
-        <h2>${vehicle.name}</h2>
-        <p>Country: ${vehicle.country}</p>
-        <p>Year: ${vehicle.year}</p>
-        <p>Type: ${vehicle.type}</p>
-        <p>Crew: ${vehicle.crew}</p>
-    `;
+    card.innerHTML = ` 
+    <h2>${vehicle.name}</h2> 
+    <p>Country: ${vehicle.country}</p> 
+    <p>Year: ${vehicle.year}</p> 
+    <p>Type: ${vehicle.type}</p> 
+    <p>Crew: ${vehicle.crew}</p>
+    <button class="details-button">Show details</button>
+    `; 
+const detailsButton = card.querySelector(".details-button");
+detailsButton.addEventListener("click", () => 
+    { alert( 
+        `${vehicle.name}\n\n` + 
+        `Country: ${vehicle.country}\n` + 
+        `Year: ${vehicle.year}\n` + 
+        `Type: ${vehicle.type}\n` + 
+        `Crew: ${vehicle.crew}` 
+         );  
+    });
 
-    vehiclesContainer.appendChild(card);
+
+ vehiclesContainer.appendChild(card);
 });
 }
 renderVehicles(vehicles); 
