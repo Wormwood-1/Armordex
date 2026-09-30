@@ -248,14 +248,30 @@ const vehicles = [
 ]; 
 
 const vehiclesContainer = document.querySelector("#vehicles-container");
-vehicles.forEach((vehicle) => { const card = document.createElement("div");
-card.innerHTML = `
-    <h2>${vehicle.name}</h2>
-    <p>Country: ${vehicle.country}</p>
-    <p>Year: ${vehicle.year}</p>
-    <p>Type: ${vehicle.type}</p>
-    <p>Crew: ${vehicle.crew}</p>
-`;
+function renderVehicles(vehicleList) { vehiclesContainer.innerHTML = "";
+vehicleList.forEach((vehicle) => {
+    const card = document.createElement("div");
 
-vehiclesContainer.appendChild(card);
+    card.innerHTML = `
+        <h2>${vehicle.name}</h2>
+        <p>Country: ${vehicle.country}</p>
+        <p>Year: ${vehicle.year}</p>
+        <p>Type: ${vehicle.type}</p>
+        <p>Crew: ${vehicle.crew}</p>
+    `;
+
+    vehiclesContainer.appendChild(card);
 });
+}
+renderVehicles(vehicles); 
+// здесь создал карточки на каждую единицу, переделал вывод карточек 
+
+const searchInput = document.querySelector("#search");
+searchInput.addEventListener("input", () => { const searchText = searchInput.value.toLowerCase();
+const filteredVehicles = vehicles.filter((vehicle) =>
+    vehicle.name.toLowerCase().includes(searchText)
+);
+
+renderVehicles(filteredVehicles);
+});
+// Прикручиваю поиск
