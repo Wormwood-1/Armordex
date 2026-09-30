@@ -249,9 +249,14 @@ const vehicles = [
 
 const vehiclesContainer = document.querySelector("#vehicles-container");
 const resultsCount = document.querySelector("#results-count"); 
-
-function renderVehicles(vehicleList) { vehiclesContainer.innerHTML = ""; 
-resultsCount.textContent =
+const yearSort = document.querySelector("#year-sort");
+function renderVehicles(vehicleList) { 
+    vehiclesContainer.innerHTML = ""; 
+    if (vehicleList.length === 0) { 
+        vehiclesContainer.innerHTML = "<p>NO vehicles found.</p>";
+        return;
+    }
+    resultsCount.textContent =
     `Showing ${vehicleList.length} of ${vehicles.length} vehicles`;   
     vehicleList.forEach((vehicle) => {
     const card = document.createElement("div");
@@ -264,10 +269,9 @@ resultsCount.textContent =
     <p>Crew: ${vehicle.crew}</p>
     <button class="details-button">Show details</button>
     `; 
-const detailsButton = card.querySelector(".details-button");
-detailsButton.addEventListener("click", () => { 
-    const details = card.querySelector(".vehicle-details"); 
-
+   const detailsButton = card.querySelector(".details-button");
+          detailsButton.addEventListener("click", () => { 
+   const details = card.querySelector(".vehicle-details"); 
     if (details) {
         details.remove(); 
         detailsButton.textContent = "Show details"; 
@@ -294,7 +298,10 @@ renderVehicles(vehicles);
 
 const searchInput = document.querySelector("#search");
 const countryFilter = document.querySelector("#country-filter");
-function filterVehicles() { const searchText = searchInput.value.toLowerCase(); const selectedCountry = countryFilter.value;
+function filterVehicles() { 
+const searchText = searchInput.value.toLowerCase(); 
+const selectedCountry = countryFilter.value;
+const selectedSort = yearSort.value
 const filteredVehicles = vehicles.filter((vehicle) => {
     const matchesSearch = vehicle.name
         .toLowerCase()
@@ -306,11 +313,18 @@ const filteredVehicles = vehicles.filter((vehicle) => {
 
     return matchesSearch && matchesCountry;
 });
+if (selectedSort === "newest") {
+    filteredVehicles.sort((a, b) => b.year - a.year);
+}
 
+if (selectedSort === "oldest") {
+    filteredVehicles.sort((a, b) => a.year - b.year);
+}
 renderVehicles(filteredVehicles);
 }
 searchInput.addEventListener("input", filterVehicles);
 countryFilter.addEventListener("change", filterVehicles);
+yearSort.addEventListener("change", filterVehicles);
 // 
 
 const countries = [...new Set( vehicles.map((vehicle) => vehicle.country) )];
