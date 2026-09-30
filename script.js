@@ -248,7 +248,11 @@ const vehicles = [
 ]; 
 
 const vehiclesContainer = document.querySelector("#vehicles-container");
-function renderVehicles(vehicleList) { vehiclesContainer.innerHTML = "";
+const resultsCount = document.querySelector("#results-count"); 
+
+function renderVehicles(vehicleList) { vehiclesContainer.innerHTML = ""; 
+resultsCount.textContent =
+    `Showing ${vehicleList.length} of ${vehicles.length} vehicles`;   
 vehicleList.forEach((vehicle) => {
     const card = document.createElement("div");
 
@@ -264,7 +268,7 @@ vehicleList.forEach((vehicle) => {
 });
 }
 renderVehicles(vehicles); 
-// здесь создал карточки на каждую единицу, переделал вывод карточек 
+// добавил счетчик вывода
 
 const searchInput = document.querySelector("#search");
 const countryFilter = document.querySelector("#country-filter");
