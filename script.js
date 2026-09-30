@@ -320,6 +320,19 @@ if (selectedSort === "newest") {
 if (selectedSort === "oldest") {
     filteredVehicles.sort((a, b) => a.year - b.year);
 }
+
+if (selectedSort === "name-asc") {
+    filteredVehicles.sort((a, b) =>
+        a.name.localeCompare(b.name)
+    );
+}
+
+if (selectedSort === "name-desc") {
+    filteredVehicles.sort((a, b) =>
+        b.name.localeCompare(a.name)
+    );
+}
+
 renderVehicles(filteredVehicles);
 }
 searchInput.addEventListener("input", filterVehicles);
