@@ -4,7 +4,7 @@ const vehicles = [
 // crew — штатный экипаж (без десанта)
 
   // ===== Germany =====
-  { name: "Panzer 38(t)", country: "Germany", year: 1939, type: "Light tank", crew: 4 },
+  { name: "Panzer 38(t)", country: "Germany", year: 1939, type: "Light tank", crew: 4, armament: "37 mm Škoda A7", weight: 9.7, speed: 42, engine: "Praga EPA" },
   { name: "Panzer II Ausf. F", country: "Germany", year: 1941, type: "Light tank", crew: 3 },
   { name: "Panzer III Ausf. J", country: "Germany", year: 1941, type: "Medium tank", crew: 5 },
   { name: "Panzer IV Ausf. H", country: "Germany", year: 1943, type: "Medium tank", crew: 5 },
@@ -265,22 +265,32 @@ resultsCount.textContent =
     <button class="details-button">Show details</button>
     `; 
 const detailsButton = card.querySelector(".details-button");
-detailsButton.addEventListener("click", () => 
-    { alert( 
-        `${vehicle.name}\n\n` + 
-        `Country: ${vehicle.country}\n` + 
-        `Year: ${vehicle.year}\n` + 
-        `Type: ${vehicle.type}\n` + 
-        `Crew: ${vehicle.crew}` 
-         );  
-    });
+detailsButton.addEventListener("click", () => { 
+    const details = card.querySelector(".vehicle-details"); 
 
-
- vehiclesContainer.appendChild(card);
+    if (details) {
+        details.remove(); 
+        detailsButton.textContent = "Show details"; 
+        return;
+     } 
+     const newDetails =document.createElement("div"); 
+     newDetails.className = "vehicle-details"; 
+     
+     newDetails.innerHTML =  `
+      <p>Armament: ${vehicle.armament}</p>
+      <p>Weight: ${vehicle.weight} tons</p>
+      <p>Speed: ${vehicle.speed} km/h</p>
+      <p>Engine: ${vehicle.engine}</p>
+     `;
+    card.appendChild(newDetails); 
+    detailsButton.textContent = "Hide details"; 
+});
+  
+   vehiclesContainer.appendChild(card);
 });
 }
 renderVehicles(vehicles); 
-// добавил счетчик вывода
+// 
 
 const searchInput = document.querySelector("#search");
 const countryFilter = document.querySelector("#country-filter");
@@ -301,7 +311,7 @@ renderVehicles(filteredVehicles);
 }
 searchInput.addEventListener("input", filterVehicles);
 countryFilter.addEventListener("change", filterVehicles);
-// Теперь поиск с сортировкой
+// 
 
 const countries = [...new Set( vehicles.map((vehicle) => vehicle.country) )];
 countries.sort();
@@ -311,4 +321,4 @@ option.textContent = country;
 
 countryFilter.appendChild(option);
 }); 
-// автоматическое заполнение списка стран
+// 
