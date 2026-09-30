@@ -277,10 +277,10 @@ detailsButton.addEventListener("click", () => {
      newDetails.className = "vehicle-details"; 
      
      newDetails.innerHTML =  `
-      <p>Armament: ${vehicle.armament}</p>
-      <p>Weight: ${vehicle.weight} tons</p>
-      <p>Speed: ${vehicle.speed} km/h</p>
-      <p>Engine: ${vehicle.engine}</p>
+      <p>Armament: ${vehicle.armament || "Data unavailable"}</p>
+      <p>Weight: ${vehicle.weight ? vehicle.weight + " tons" : "Data unavailable"}</p>
+      <p>Speed: ${vehicle.speed ? vehicle.speed + " km/h" : "Data unavailable"}</p>
+      <p>Engine: ${vehicle.engine || "Data unavailable"}</p>
      `;
     card.appendChild(newDetails); 
     detailsButton.textContent = "Hide details"; 
