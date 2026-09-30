@@ -267,11 +267,32 @@ renderVehicles(vehicles);
 // здесь создал карточки на каждую единицу, переделал вывод карточек 
 
 const searchInput = document.querySelector("#search");
-searchInput.addEventListener("input", () => { const searchText = searchInput.value.toLowerCase();
-const filteredVehicles = vehicles.filter((vehicle) =>
-    vehicle.name.toLowerCase().includes(searchText)
-);
+const countryFilter = document.querySelector("#country-filter");
+function filterVehicles() { const searchText = searchInput.value.toLowerCase(); const selectedCountry = countryFilter.value;
+const filteredVehicles = vehicles.filter((vehicle) => {
+    const matchesSearch = vehicle.name
+        .toLowerCase()
+        .includes(searchText);
+
+    const matchesCountry =
+        selectedCountry === "all" ||
+        vehicle.country === selectedCountry;
+
+    return matchesSearch && matchesCountry;
+});
 
 renderVehicles(filteredVehicles);
-});
-// Прикручиваю поиск
+}
+searchInput.addEventListener("input", filterVehicles);
+countryFilter.addEventListener("change", filterVehicles);
+// Теперь поиск с сортировкой
+
+const countries = [...new Set( vehicles.map((vehicle) => vehicle.country) )];
+countries.sort();
+countries.forEach((country) => { const option = document.createElement("option");
+option.value = country;
+option.textContent = country;
+
+countryFilter.appendChild(option);
+}); 
+// автоматическое заполнение списка стран
