@@ -19,16 +19,27 @@ header h1 {
     display: flex;
     gap: 10px;
     margin-bottom: 15px;
+    flex-wrap: wrap;
 }
 
 input,
 select {
     padding: 10px;
     font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background: white;
+} 
+
+input:focus,
+select:focus {
+    outline: none;
+    border-color: #666;
 }
 
 input {
     flex: 1;
+    min-width: 200px;
 }
 
 #results-count {
