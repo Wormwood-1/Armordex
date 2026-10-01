@@ -301,10 +301,13 @@ renderVehicles(vehicles);
 // 
 
 const searchInput = document.querySelector("#search");
-const countryFilter = document.querySelector("#country-filter");
+const countryFilter = document.querySelector("#country-filter"); 
+const typeFilter = document.querySelector("#type-filter"); 
+
 function filterVehicles() { 
 const searchText = searchInput.value.toLowerCase(); 
 const selectedCountry = countryFilter.value;
+const selectedType = typeFilter.value;
 const selectedSort = yearSort.value
 const filteredVehicles = vehicles.filter((vehicle) => {
     const matchesSearch = vehicle.name
@@ -313,9 +316,13 @@ const filteredVehicles = vehicles.filter((vehicle) => {
 
     const matchesCountry =
         selectedCountry === "all" ||
-        vehicle.country === selectedCountry;
+        vehicle.country === selectedCountry; 
 
-    return matchesSearch && matchesCountry;
+    const matchesType =
+    selectedType === "all" ||
+    vehicle.type === selectedType;
+
+    return matchesSearch && matchesCountry && matchesType;
 });
 if (selectedSort === "newest") {
     filteredVehicles.sort((a, b) => b.year - a.year);
@@ -341,7 +348,9 @@ renderVehicles(filteredVehicles);
 }
 searchInput.addEventListener("input", filterVehicles);
 countryFilter.addEventListener("change", filterVehicles);
-yearSort.addEventListener("change", filterVehicles);
+typeFilter.addEventListener("change", filterVehicles);
+yearSort.addEventListener("change", filterVehicles); 
+
 // 
 
 const countries = [...new Set( vehicles.map((vehicle) => vehicle.country) )];
@@ -352,4 +361,13 @@ option.textContent = country;
 
 countryFilter.appendChild(option);
 }); 
+
+const types = [...new Set(vehicles.map((vehicle) => vehicle.type))];
+types.sort();
+types.forEach((type) => { const option = document.createElement("option");
+option.value = type;
+option.textContent = type;
+
+typeFilter.appendChild(option);
+});
 // 
