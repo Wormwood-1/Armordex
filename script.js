@@ -252,7 +252,18 @@ const vehicles = [
 
 const vehiclesContainer = document.querySelector("#vehicles-container");
 const resultsCount = document.querySelector("#results-count"); 
-const yearSort = document.querySelector("#year-sort");
+const yearSort = document.querySelector("#year-sort"); 
+const vehicleModal = document.querySelector("#vehicle-modal");
+const modalBody = document.querySelector("#modal-body");
+const modalClose = document.querySelector("#modal-close"); 
+const searchInput = document.querySelector("#search");
+const countryFilter = document.querySelector("#country-filter"); 
+const typeFilter = document.querySelector("#type-filter"); 
+
+modalClose.addEventListener("click", () => {
+    vehicleModal.classList.remove("active");
+});
+
 function renderVehicles(vehicleList) { 
     vehiclesContainer.innerHTML = ""; 
     if (vehicleList.length === 0) { 
@@ -273,42 +284,40 @@ function renderVehicles(vehicleList) {
     <p>Crew: ${vehicle.crew}</p>
     <button class="details-button">Show details</button>
     `; 
-   const detailsButton = card.querySelector(".details-button");
-          detailsButton.addEventListener("click", () => { 
-   const details = card.querySelector(".vehicle-details"); 
-    if (details) {
-        details.remove(); 
-        detailsButton.textContent = "Show details"; 
-        return;
-     } 
-     const newDetails =document.createElement("div"); 
-     newDetails.className = "vehicle-details"; 
-     
-     newDetails.innerHTML =  `
-      <p>Armament: ${vehicle.armament || "Data unavailable"}</p>
-      <p>Weight: ${vehicle.weight ? vehicle.weight + " tons" : "Data unavailable"}</p>
-      <p>Speed: ${vehicle.speed ? vehicle.speed + " km/h" : "Data unavailable"}</p>
-      <p>Engine: ${vehicle.engine || "Data unavailable"}</p>
-     `;
-    card.appendChild(newDetails); 
-    detailsButton.textContent = "Hide details"; 
+  const detailsButton = card.querySelector(".details-button");
+          detailsButton.addEventListener("click", () => {
+          console.log("button clicked");
+          console.log("modalBody:", modalBody);
+
+          modalBody.innerHTML = `
+          <h2>${vehicle.name}</h2> 
+          
+          <img src="${vehicle.image}" alt="${vehicle.name}"> 
+          
+          <p>Country: ${vehicle.country}</p> 
+          <p>Year: ${vehicle.year}</p> 
+          <p>Type: ${vehicle.type}</p> 
+          <p>Crew: ${vehicle.crew}</p> 
+          <p>Armament: ${vehicle.armament || "Data unavailable"}</p> 
+          <p>Weight: ${vehicle.weight ? vehicle.weight + " tons" : "Data unavailable"}</p> 
+          <p>Speed: ${vehicle.speed ? vehicle.speed + " km/h" : "Data unavailable"}</p> 
+          <p>Engine: ${vehicle.engine || "Data unavailable"}</p>`; 
+          
+          vehicleModal.classList.add("active");
 });
   
    vehiclesContainer.appendChild(card);
-});
+}); 
 }
 renderVehicles(vehicles); 
-// 
-
-const searchInput = document.querySelector("#search");
-const countryFilter = document.querySelector("#country-filter"); 
-const typeFilter = document.querySelector("#type-filter"); 
 
 function filterVehicles() { 
 const searchText = searchInput.value.toLowerCase(); 
 const selectedCountry = countryFilter.value;
 const selectedType = typeFilter.value;
 const selectedSort = yearSort.value
+
+
 const filteredVehicles = vehicles.filter((vehicle) => {
     const matchesSearch = vehicle.name
         .toLowerCase()
@@ -351,8 +360,6 @@ countryFilter.addEventListener("change", filterVehicles);
 typeFilter.addEventListener("change", filterVehicles);
 yearSort.addEventListener("change", filterVehicles); 
 
-// 
-
 const countries = [...new Set( vehicles.map((vehicle) => vehicle.country) )];
 countries.sort();
 countries.forEach((country) => { const option = document.createElement("option");
@@ -370,4 +377,3 @@ option.textContent = type;
 
 typeFilter.appendChild(option);
 });
-// 
