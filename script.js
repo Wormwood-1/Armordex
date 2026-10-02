@@ -264,6 +264,18 @@ modalClose.addEventListener("click", () => {
     vehicleModal.classList.remove("active");
 });
 
+vehicleModal.addEventListener("click", (event) => {
+    if (event.target === vehicleModal) {
+        vehicleModal.classList.remove("active");
+    }
+});
+
+document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape") {
+        vehicleModal.classList.remove("active");
+    }
+});
+
 function renderVehicles(vehicleList) { 
     vehiclesContainer.innerHTML = ""; 
     if (vehicleList.length === 0) { 
@@ -286,13 +298,11 @@ function renderVehicles(vehicleList) {
     `; 
   const detailsButton = card.querySelector(".details-button");
           detailsButton.addEventListener("click", () => {
-          console.log("button clicked");
-          console.log("modalBody:", modalBody);
 
           modalBody.innerHTML = `
           <h2>${vehicle.name}</h2> 
           
-          <img src="${vehicle.image}" alt="${vehicle.name}"> 
+          <img class="modal-image" src="${vehicle.image}" alt="${vehicle.name}"> 
           
           <p>Country: ${vehicle.country}</p> 
           <p>Year: ${vehicle.year}</p> 
