@@ -304,16 +304,24 @@ function renderVehicles(vehicleList) {
           
           <img class="modal-image" src="${vehicle.image}" alt="${vehicle.name}"> 
           
-          <p>Country: ${vehicle.country}</p> 
-          <p>Year: ${vehicle.year}</p> 
-          <p>Type: ${vehicle.type}</p> 
-          <p>Crew: ${vehicle.crew}</p> 
-          <p>Armament: ${vehicle.armament || "Data unavailable"}</p> 
-          <p>Weight: ${vehicle.weight ? vehicle.weight + " tons" : "Data unavailable"}</p> 
-          <p>Speed: ${vehicle.speed ? vehicle.speed + " km/h" : "Data unavailable"}</p> 
-          <p>Engine: ${vehicle.engine || "Data unavailable"}</p>`; 
-          
-          vehicleModal.classList.add("active");
+          <div class="modal-specs"> 
+            <div> 
+               <p><span>Country: </span>${vehicle.country}</p> 
+               <p><span>Year: </span>${vehicle.year}</p> 
+               <p><span>Type: </span>${vehicle.type}</p> 
+               <p><span>Crew: </span>${vehicle.crew}</p> 
+            </div> 
+
+            <div> 
+               <p><span>Armament: </span>${vehicle.armament || "Data unavailable"}</p> 
+               <p><span>Weight: </span>${vehicle.weight ? vehicle.weight + " tons" : "Data unavailable"}</p> 
+               <p><span>Speed: </span>${vehicle.speed ? vehicle.speed + " km/h" : "Data unavailable"}</p> 
+               <p><span>Engine: </span>${vehicle.engine || "Data unavailable"}</p> 
+            </div> 
+        </div>
+    `; 
+
+    vehicleModal.classList.add("active");
 });
   
    vehiclesContainer.appendChild(card);
