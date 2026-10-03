@@ -35,7 +35,11 @@ header span {
 .controls {
     display: flex;
     gap: 10px;
-    margin-bottom: 15px;
+    margin-bottom: 20px;
+    padding: 15px; 
+    background: white;
+    border-radius: 10px; 
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     flex-wrap: wrap;
 }
 
@@ -60,9 +64,9 @@ input {
 }
 
 #results-count {
-    margin-bottom: 20px;
+    margin-bottom: 0 0 20px;
     color: #555;
-    font-size: 15px;
+    font-size: 14px;
     font-weight: 600;
 }
 
@@ -74,9 +78,10 @@ input {
 
 #vehicles-container > div { 
     background: white; 
+    border: 1px solid #e5e5e5;
     padding: 20px; 
     border-radius: 10px; 
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
     
     transition: transform 0.2s ease,
                 box-shadow 0.2s ease; 
@@ -110,7 +115,7 @@ input {
 #vehicles-container h2 {
     margin-top: 0; 
     margin-bottom: 12px;
-    font-size: 22px;
+    font-size: 20px;
     line-height: 1.2;
 }
 #vehicles-container p {
