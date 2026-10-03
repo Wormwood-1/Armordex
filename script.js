@@ -278,23 +278,26 @@ document.addEventListener("keydown", (event) => {
 
 function renderVehicles(vehicleList) { 
     vehiclesContainer.innerHTML = ""; 
+    
+     resultsCount.textContent =
+            `Showing ${vehicleList.length} of ${vehicles.length} vehicles`;  
+    
     if (vehicleList.length === 0) { 
-        vehiclesContainer.innerHTML = "<p>NO vehicles found.</p>";
+        vehiclesContainer.innerHTML = "<p>No vehicles found.</p>";
         return;
     }
-    resultsCount.textContent =
-    `Showing ${vehicleList.length} of ${vehicles.length} vehicles`;   
+    
     vehicleList.forEach((vehicle) => {
     const card = document.createElement("div");
 
     card.innerHTML = ` 
     <h2>${vehicle.name}</h2> 
-    <img src="${vehicle.image}" alt="${vehicle.name}">
-    <p>Country: ${vehicle.country}</p> 
-    <p>Year: ${vehicle.year}</p> 
-    <p>Type: ${vehicle.type}</p> 
-    <p>Crew: ${vehicle.crew}</p>
-    <button class="details-button">Show details</button>
+    <img src="${vehicle.image}" alt="${vehicle.name}" loading="lazy">
+    <p><strong>Country: </strong> ${vehicle.country}</p> 
+    <p><strong>Year: </strong> ${vehicle.year}</p> 
+    <p><strong>Type: </strong> ${vehicle.type}</p> 
+    <p><strong>Crew: </strong> ${vehicle.crew}</p>
+    <button type="button" class="details-button" aria-label="Show details about ${vehicle.name}">Show details</button>
     `; 
   const detailsButton = card.querySelector(".details-button");
           detailsButton.addEventListener("click", () => {
@@ -306,10 +309,10 @@ function renderVehicles(vehicleList) {
           
           <div class="modal-specs"> 
             <div> 
-               <p><span>Country: </span>${vehicle.country}</p> 
-               <p><span>Year: </span>${vehicle.year}</p> 
+               <p><span>Country: </span>${vehicle.country}</p>  
+               <p><span>Year: </span>${vehicle.year || "Data unavailable"}</p> 
                <p><span>Type: </span>${vehicle.type}</p> 
-               <p><span>Crew: </span>${vehicle.crew}</p> 
+               <p><span>Crew: </span>${vehicle.crew || "Data unavailable"}</p> 
             </div> 
 
             <div> 
@@ -330,16 +333,16 @@ function renderVehicles(vehicleList) {
 renderVehicles(vehicles); 
 
 function filterVehicles() { 
-const searchText = searchInput.value.toLowerCase(); 
+const searchText = searchInput.value.toLowerCase().trim(); 
 const selectedCountry = countryFilter.value;
 const selectedType = typeFilter.value;
 const selectedSort = yearSort.value
 
 
 const filteredVehicles = vehicles.filter((vehicle) => {
-    const matchesSearch = vehicle.name
-        .toLowerCase()
-        .includes(searchText);
+    const matchesSearch = (vehicle.name || "").toLowerCase().includes(searchText) || 
+                          (vehicle.country || "").toLowerCase().includes(searchText) || 
+                          (vehicle.type || "").toLowerCase().includes(searchText);
 
     const matchesCountry =
         selectedCountry === "all" ||
@@ -352,22 +355,22 @@ const filteredVehicles = vehicles.filter((vehicle) => {
     return matchesSearch && matchesCountry && matchesType;
 });
 if (selectedSort === "newest") {
-    filteredVehicles.sort((a, b) => b.year - a.year);
+    filteredVehicles.sort((a, b) => (b.year || 0) - (a.year || 0));
 }
 
 if (selectedSort === "oldest") {
-    filteredVehicles.sort((a, b) => a.year - b.year);
+    filteredVehicles.sort((a, b) => (a.year || 0) - (b.year || 0));
 }
 
 if (selectedSort === "name-asc") {
     filteredVehicles.sort((a, b) =>
-        a.name.localeCompare(b.name)
+        (a.name || "").localeCompare(b.name || "")
     );
 }
 
 if (selectedSort === "name-desc") {
     filteredVehicles.sort((a, b) =>
-        b.name.localeCompare(a.name)
+        (b.name || "").localeCompare(a.name || "")
     );
 }
 

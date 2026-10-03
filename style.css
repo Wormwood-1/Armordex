@@ -44,7 +44,9 @@ input {
 
 #results-count {
     margin-bottom: 20px;
-    color: #666;
+    color: #555;
+    font-size: 15px;
+    font-weight: 600;
 }
 
 #vehicles-container {
@@ -60,7 +62,8 @@ input {
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     
     transition: transform 0.2s ease,
-                box-shadow 0.2s ease;
+                box-shadow 0.2s ease; 
+    overflow: hidden; 
 }
 
 #vehicles-container > div:hover { 
@@ -77,7 +80,8 @@ input {
     font-weight: 600;
     background: #333;
     color: white;
-    transition: background 0.2s ease, transform 0.2s ease;
+    transition: background 0.2s ease, transform 0.2s ease; 
+    margin-top: 10px;
 }
 
 
@@ -87,7 +91,14 @@ input {
 }
 
 #vehicles-container h2 {
-    margin-top: 0;
+    margin-top: 0; 
+    margin-bottom: 12px;
+    font-size: 22px;
+    line-height: 1.2;
+}
+#vehicles-container p {
+    margin: 8px 0;
+    line-height: 1.4;
 }
 
 #vehicles-container img {
@@ -96,8 +107,12 @@ input {
     object-fit: cover;
     border-radius: 8px;
     margin-bottom: 15px;
-    display: block;
+    display: block; 
+    transition: transform 0.2s ease;
 } 
+#vehicles-container >div:hover img {
+    transform: scale(1.03);
+}
 .modal {
     display: none;
     position: fixed;
@@ -112,7 +127,13 @@ input {
 .modal.active {
     display: flex;
 }
-
+.modal.active .modal-content { animation: modalAppear 0.2s ease; }
+@keyframes modalAppear { from { opacity: 0; transform: scale(0.95); }
+to {
+    opacity: 1;
+    transform: scale(1);
+}
+}
 .modal-content {
     position: relative;
     background: white;
@@ -214,4 +235,10 @@ input {
 } 
 .modal-specs p:last-child {
     border-bottom: none;
+} 
+#vehicles-container > p {
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-top: 30px;
 }
