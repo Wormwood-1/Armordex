@@ -249,7 +249,11 @@ const vehicles = [
   { name: "Wiesel 1", country: "West Germany", year: 1990, type: "Light armored vehicle", crew: 3, armament: "20 mm Rh 202", weight: 2.8, speed: 80, engine: "VW Audi 2.1 L", image: "images/wiesel-1.jpg" },
 ];
  
-
+const heroStats = document.querySelector("#hero-stats");   
+const countryCount = new Set(vehicles.map(vehicle => vehicle.country)).size; 
+const typeCount = new Set(vehicles.map(vehicle => vehicle.type)).size;
+heroStats.textContent = 
+     `${vehicles.length} Vehicles · ${countryCount} Countries · ${typeCount} Types`;
 const vehiclesContainer = document.querySelector("#vehicles-container");
 const resultsCount = document.querySelector("#results-count"); 
 const yearSort = document.querySelector("#year-sort"); 
