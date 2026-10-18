@@ -34,7 +34,7 @@ const vehicles = [
   { name: "TPz Fuchs", country: "West Germany", year: 1979, type: "APC", crew: 2, armament: "7.62 mm MG3", weight: 17, speed: 105, engine: "Mercedes-Benz OM 402A", image: "images/tpz-fuchs.jpg" },
  
   // ===== USSR =====
-  { name: "BT-7M", country: "USSR", year: 1938, type: "Light tank", crew: 3, armament: "45 mm 20K", weight: 14.5, speed: 86, engine: "V-2", image: "images/bt-7m.jpg" },
+  { name: "BT-7M", country: "USSR", year: 1938, type: "Light tank", crew: 3, armament: "45 mm 20K", weight: 14.5, speed: 86, engine: "V-2", image: "images/bt7-m.jpg" },
   { name: "T-34-76", country: "USSR", year: 1940, type: "Medium tank", crew: 4, armament: "76.2 mm F-34", weight: 26.5, speed: 55, engine: "V-2-34", image: "images/t-34-76.jpg" },
   { name: "T-34-85", country: "USSR", year: 1944, type: "Medium tank", crew: 5, armament: "85 mm ZiS-S-53", weight: 32, speed: 55, engine: "V-2-34", image: "images/t-34-85.jpg" },
   { name: "KV-1", country: "USSR", year: 1939, type: "Heavy tank", crew: 5, armament: "76.2 mm F-32 / ZiS-5", weight: 45, speed: 35, engine: "V-2K", image: "images/kv-1.jpg" },
