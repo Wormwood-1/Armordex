@@ -1,51 +1,56 @@
-<!DOCTYPE html> 
-<html lang="en"> 
-    <head> 
-        <meta charset="UTF-8">
-        <meta name="viewport"content="width=device-width, initial-scale=1.0"> 
-        <title>Armordex</title> 
-        <link rel="stylesheet" href="style.css">
-</head> 
-<body> 
-<header>
-    <h1>Armordex</h1>
-    <p>Historical Armored Vehicle Encyclopedia</p>
-    <span id="hero-stats"></span>
-</header>
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Armordex</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <header>
+      <h1>Armordex</h1>
+      <p>Historical Armored Vehicle Encyclopedia</p>
+      <span id="hero-stats"></span>
+    </header>
 
-<main>
-
-    <section class="controls">
-        <input type="text" id="search" placeholder="Search vehicle...">
+    <main>
+      <section class="controls">
+        <input type="text" id="search" placeholder="Search vehicle..." />
 
         <select id="country-filter">
-            <option value="all">All countries</option>
-        </select> 
+          <option value="all">All countries</option>
+        </select>
 
         <select id="type-filter">
-             <option value="all">All types</option>
+          <option value="all">All types</option>
         </select>
 
         <select id="year-sort">
-           <option value="none">Sort</option>
-           <option value="newest">Newest first</option>
-           <option value="oldest">Oldest first</option>
-           <option value="name-asc">Name A-Z</option>
-           <option value="name-desc">Name Z-A</option>
-</select>
-    </section>
+          <option value="none">Sort</option>
+          <option value="newest">Newest first</option>
+          <option value="oldest">Oldest first</option>
+          <option value="name-asc">Name A-Z</option>
+          <option value="name-desc">Name Z-A</option>
+        </select>
+      </section>
 
-    <p id="results-count"></p>
+      <p id="results-count"></p>
 
-    <section id="vehicles-container"></section>
-
-</main>
-<div id="vehicle-modal" class="modal"> 
-    <div class="modal-content"> 
-        <button type="button" id="modal-close" class="modal-close" aria-label="Close">&times;</button> 
-        <div id="modal-body"></div> 
-    </div> 
-</div>
-<script src="script.js"></script> 
-</body> 
+      <section id="vehicles-container"></section>
+    </main>
+    <div id="vehicle-modal" class="modal">
+      <div class="modal-content">
+        <button
+          type="button"
+          id="modal-close"
+          class="modal-close"
+          aria-label="Close"
+        >
+          &times;
+        </button>
+        <div id="modal-body"></div>
+      </div>
+    </div>
+    <script src="script.js"></script>
+  </body>
 </html>
